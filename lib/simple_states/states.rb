@@ -33,6 +33,7 @@ module SimpleStates
           event.send(:call, self, *args) do
             super(*args) if self.class.method_defined?(event.name)
           end
+          state
         end
 
         define_method(:"#{event.name}!") do |*args|

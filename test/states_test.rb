@@ -24,6 +24,11 @@ class StatesTest < Test::Unit::TestCase
     assert object.state?(:started)
   end
 
+  test "returns the state when calling a transition" do
+    object = create_class { states :started; event :start }.new
+    assert_equal :started, object.start
+  end
+
   test "raises TransitionException if no :to option is given and the state can not be derived from the states list" do
     object = create_class { event :start }.new
     assert_raises(SimpleStates::TransitionException) { object.start }
